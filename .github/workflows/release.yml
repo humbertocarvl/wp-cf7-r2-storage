@@ -29,5 +29,6 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          name: "CF7 R2 Storage ${{ github.ref_name }}"
           files: dist/cf7-r2-storage.zip
           generate_release_notes: true
