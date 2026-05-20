@@ -99,7 +99,7 @@ class CF7R2_CF7_Integration {
 				}
 
 				$object_key = self::build_object_key( $prefix, $local_path );
-				$mime       = mime_content_type( $local_path ) ?: 'application/octet-stream';
+				$mime       = self::get_mime_type( $local_path );
 				$result     = $client->upload( $local_path, $object_key, $mime );
 
 				if ( is_wp_error( $result ) ) {
@@ -285,5 +285,25 @@ class CF7R2_CF7_Integration {
 
 		$parts = array_filter( [ $prefix, $date, $unique . '_' . $basename ] );
 		return implode( '/', $parts );
+	}
+
+	/**
+	 * Detecta o MIME type de um arquivo.
+	 * Tenta mime_content_type() (extensão fileinfo) e cai para
+	 * wp_check_filetype() por extensão se não estiver disponível.
+	 *
+	 * @param string $local_path Caminho absoluto do arquivo.
+	 * @return string MIME type.
+	 */
+	private static function get_mime_type( string $local_path ): string {
+		if ( function_exists( 'mime_content_type' ) ) {
+			$mime = mime_content_type( $local_path );
+			if ( ! empty( $mime ) ) {
+				return $mime;
+			}
+		}
+
+		$type_data = wp_check_filetype( wp_basename( $local_path ) );
+		return ! empty( $type_data['type'] ) ? $type_data['type'] : 'application/octet-stream';
 	}
 }

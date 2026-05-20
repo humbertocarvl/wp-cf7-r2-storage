@@ -3,7 +3,7 @@
  * Plugin Name: CF7 R2 Storage
  * Plugin URI:  https://github.com/humbertocarvl/wp-cf7-r2-storage
  * Description: Envia anexos do Contact Form 7 diretamente para o Cloudflare R2, incluindo os links no e-mail em vez de armazenar os arquivos no servidor.
- * Version:     1.0.2
+ * Version:     1.0.3
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * Author:      humbertocarvl
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 // Guard the entire plugin against loading twice when duplicate copies are active.
 if ( ! function_exists( 'cf7r2_init' ) ) {
 
-	define( 'CF7R2_VERSION', '1.0.2' );
+	define( 'CF7R2_VERSION', '1.0.3' );
 	define( 'CF7R2_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 	define( 'CF7R2_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 	define( 'CF7R2_OPTION_KEY', 'cf7r2_settings' );
